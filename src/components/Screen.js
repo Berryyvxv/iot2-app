@@ -2,6 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee, faFlag } from '@fortawesome/free-solid-svg-icons'; // Replace with the actual icons you want to use
 
+
 function Screen() {
   const containerStyle = {
     color: '#fff',
@@ -54,7 +55,7 @@ function Screen() {
       <div style={cardStyle}>
         <FontAwesomeIcon icon={faCoffee} style={iconStyle} />
         <h1 style={labelStyle}>Table 1</h1>
-        <h3 style={subHeadingStyle}>Warning type: None</h3>
+        <h3 style={subHeadingStyle}>Warning type: </h3>
         <h3 style={subHeadingStyle}>Table Availability: Available</h3>
       </div>
 

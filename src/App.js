@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Screen from './components/Screen'
+import Table from './components/Table'
 
 function App() {
   const titleStyle = {
