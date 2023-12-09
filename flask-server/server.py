@@ -23,10 +23,11 @@ DB = firebase.database()
 
 def get_data():
     # Retrieve data from Firebase
-    data1 = DB.child('test/float').get().val() #Warning Type
-    data2 = DB.child('test/int').get().val() #Table ID
+    data1 = DB.child('Tables/Table1/ID').get().val()  # Table ID
+    data2 = DB.child('Tables/Table1/Status').get().val() #Table Status
+    data3 = DB.child('Tables/Table1/Warning').get().val() #noiseLevel
 
-    return {'tableID1': data1, 'noiseLevel1': data2}
+    return {'tableID': data1, 'tableStatus': data2, 'noiseLevel': data3}
 
 # Route for seeing data including Firebase data
 @app.route('/noiseLevel')
@@ -36,11 +37,9 @@ def get_noiseLevel():
 
     # Construct the response dictionary
     response_data = {
-        'tableID': 1,
-        'noiseLevel': "First",
-        'tableAvailability': "Not Available",
-        'tableID1': firebase_data['tableID1'],
-        'noiseLevel1': firebase_data['noiseLevel1'],
+        'tableID': firebase_data['tableID'],
+        'tableStatus': firebase_data['tableStatus'],
+        'noiseLevel': firebase_data['noiseLevel'],
     }
 
     # Returning the combined data as a JSON response

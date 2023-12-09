@@ -5,11 +5,9 @@ import { faCoffee, faFlag } from '@fortawesome/free-solid-svg-icons';
 
 function Screen() {
   const [data, setData] = useState({
-    tableID: 0,
-    noiseLevel: "",
-    tableAvailability: "",
-    tableID1:"",
-    noiseLevel1:"",
+    tableID: "",
+    tableStatus: "",
+    noiseLevel:"",
 });
   // data is the actual varible, and setData used to manipulate the state of these data varible
 
@@ -21,10 +19,8 @@ function Screen() {
             // Setting a data from api
             setData({
               tableID: data.tableID,
+              tableStatus: data.tableStatus,
               noiseLevel: data.noiseLevel,
-              tableAvailability: data.tableAvailability,
-              tableID1:data.tableID1,
-              noiseLevel1:data.noiseLevel1,
             }
             );
             
@@ -82,23 +78,25 @@ function Screen() {
     <div style={containerStyle}>
 
 
-    {/* data1 = DB.child('test/float').get().val() #Warning Type
-    data2 = DB.child('test/int').get().val() #Table ID
-    return {'tableID1': data1, 'noiseLevel1': data2} */}
+{/* data1 = DB.child('Tables/Table1/ID').get().val()  # Table ID
+    data2 = DB.child('Tables/Table1/Status').get().val() #Table Status
+    data3 = DB.child('Tables/Table1/Warning').get().val() #noiseLevel
+
+    return {'tableID': data1, 'tableStatus': data2, 'noiseLevel': data3} */}
       
       <div style={cardStyle}>
         <FontAwesomeIcon icon={faCoffee} style={iconStyle} />
-        <h1 style={labelStyle}>Table {data.noiseLevel1}</h1>
-        <h3 style={subHeadingStyle}>Table Availability: {data.tableAvailability} </h3>
-        <h3 style={subHeadingStyle}>Warning type: {data.tableID1} </h3>
+        <h1 style={labelStyle}>Table: {data.tableID}</h1>
+        <h3 style={subHeadingStyle}>Table Availability: {data.tableStatus} </h3>
+        <h3 style={subHeadingStyle}>Warning type: {data.noiseLevel} </h3>
         
       </div>
 
       <div style={cardStyle}>
         <FontAwesomeIcon icon={faCoffee} style={iconStyle} />
-        <h1 style={labelStyle}>Table {data.noiseLevel1}</h1>
-        <h3 style={subHeadingStyle}>Table Availability: {data.tableAvailability} </h3>
-        <h3 style={subHeadingStyle}>Warning type: {data.tableID1} </h3>
+        <h1 style={labelStyle}>Table: {data.tableID}</h1>
+        <h3 style={subHeadingStyle}>Table Availability: {data.tableStatus} </h3>
+        <h3 style={subHeadingStyle}>Warning type: {data.noiseLevel} </h3>
         
       </div>
         
