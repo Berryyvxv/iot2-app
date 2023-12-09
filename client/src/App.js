@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import './App.css';
 import Screen from './components/Screen'
-import Table from './components/Table'
+
 
 function App() {
 
@@ -17,7 +17,6 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1 style={titleStyle}>Library Noise Level</h1>
-
         <Screen></Screen>
       </header>
 

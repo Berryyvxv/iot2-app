@@ -4,7 +4,7 @@ import { faCoffee, faFlag } from '@fortawesome/free-solid-svg-icons';
 
 
 function Screen() {
-  const [data, setdata] = useState({
+  const [data, setData] = useState({
     tableID: 0,
     noiseLevel: "",
     tableAvailability: "",
@@ -14,15 +14,17 @@ function Screen() {
   useEffect(() => {
     // Using fetch to fetch the api from 
     // flask server it will be redirected to proxy
-    fetch("/noiseLevel").then((res) =>
+    fetch("http://localhost:5000/noiseLevel").then((res) =>
         res.json().then((data) => {
             // Setting a data from api
-            setdata({
+            setData({
               tableID: data.tableID,
               noiseLevel: data.noiseLevel,
               tableAvailability: data.tableAvailability,
-            });
-        })
+            }
+            );
+            
+        }) 
     );
 }, []);
 
@@ -79,14 +81,14 @@ function Screen() {
         <FontAwesomeIcon icon={faCoffee} style={iconStyle} />
         <h1 style={labelStyle}>Table {data.tableID}</h1>
         <h3 style={subHeadingStyle}>Warning type: {data.noiseLevel} </h3>
-        <h3 style={subHeadingStyle}>Table Availability: Available {data.tableAvailability} </h3>
+        <h3 style={subHeadingStyle}>Table Availability: {data.tableAvailability} </h3>
       </div>
 
       <div style={cardStyle}>
         <FontAwesomeIcon icon={faCoffee} style={iconStyle} />
         <h1 style={labelStyle}>Table {data.tableID}</h1>
         <h3 style={subHeadingStyle}>Warning type: {data.noiseLevel} </h3>
-        <h3 style={subHeadingStyle}>Table Availability: Available {data.tableAvailability} </h3>
+        <h3 style={subHeadingStyle}>Table Availability: {data.tableAvailability} </h3>
       </div>
     </div>
   );
