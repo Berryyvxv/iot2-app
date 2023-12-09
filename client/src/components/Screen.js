@@ -10,23 +10,28 @@ function Screen() {
     noiseLevel:"",
 });
   // data is the actual varible, and setData used to manipulate the state of these data varible
+  setInterval(function () {console.log(123)}, 10000)
 
-  useEffect(() => {
-    // Using fetch to fetch the api from 
-    // flask server it will be redirected to proxy
-    fetch("http://localhost:5000/noiseLevel").then((res) =>
-        res.json().then((data) => {
-            // Setting a data from api
-            setData({
-              tableID: data.tableID,
-              tableStatus: data.tableStatus,
-              noiseLevel: data.noiseLevel,
-            }
-            );
-            
-        }) 
-    );
-}, []);
+
+
+
+
+// Set up the interval to fetch data every 2 seconds
+setInterval(async () => {
+  try {
+      const response = await fetch("http://localhost:5000/noiseLevel");
+      const data = await response.json();
+      setData({
+          tableID: data.tableID,
+          tableStatus: data.tableStatus,
+          noiseLevel: data.noiseLevel,
+      });
+  } catch (error) {
+      console.error("Error fetching data:", error);
+  }
+}, 2000); 
+
+
 
   const containerStyle = {
     color: '#fff',
