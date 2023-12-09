@@ -1,41 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState }from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee, faFlag } from '@fortawesome/free-solid-svg-icons'; 
-import { useEffect, useState } from 'react';
-
-// const Screen = () => {
-//   const [noiseLevelData, setNoiseLevelData] = useState(null);
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const response = await fetch('http://localhost:5000/');
-//         const data = await response.json();
-//         setNoiseLevelData(data);
-//       } catch (error) {
-//         console.error('Error fetching data:', error);
-//       }
-//     };
-
-//     fetchData();
-//   }, []); 
-
 
 
 function Screen() {
-  const [noiseLevelData, setNoiseLevelData] = useState ([{}])
+  const [data, setdata] = useState({
+    tableID: 0,
+    noiseLevel: "",
+    tableAvailability: "",
+});
   // data is the actual varible, and setData used to manipulate the state of these data varible
 
-useEffect(() => { 
-  fetch("/noiseLevel").then(
-    res => res.json()
-  ).then(
-    data => {
-      setNoiseLevelData(data)
-      console.log(data)
-    }
-  )
-}, [])
+  useEffect(() => {
+    // Using fetch to fetch the api from 
+    // flask server it will be redirected to proxy
+    fetch("/noiseLevel").then((res) =>
+        res.json().then((data) => {
+            // Setting a data from api
+            setdata({
+              tableID: data.tableID,
+              noiseLevel: data.noiseLevel,
+              tableAvailability: data.tableAvailability,
+            });
+        })
+    );
+}, []);
+
   const containerStyle = {
     color: '#fff',
     display: 'flex',
@@ -84,29 +74,19 @@ useEffect(() => {
 
   return (
     <div style={containerStyle}>
-       {noiseLevelData ? (
-        <div style={cardStyle}>
-            <FontAwesomeIcon icon={faCoffee} style={iconStyle} />
-          <h3 style={labelStyle}>Table No.: {noiseLevelData.tableID ?? '1'}</h3>
-          <h3 style={subHeadingStyle}>Warning Type: {noiseLevelData.noiseLevel ?? 'First'}</h3>
-          <h3 style={subHeadingStyle}>Table Availability: {noiseLevelData.tableAvailability ?? 'Not Available'}</h3>
-        </div>
-      ) : (
-        <p>Loading...</p>
-      )}
       
-      {/* <div style={cardStyle}>
+      <div style={cardStyle}>
         <FontAwesomeIcon icon={faCoffee} style={iconStyle} />
-        <h1 style={labelStyle}>Table 1</h1>
-        <h3 style={subHeadingStyle}>Warning type: </h3>
-        <h3 style={subHeadingStyle}>Table Availability: Available</h3>
-      </div> */}
+        <h1 style={labelStyle}>Table {data.tableID}</h1>
+        <h3 style={subHeadingStyle}>Warning type: {data.noiseLevel} </h3>
+        <h3 style={subHeadingStyle}>Table Availability: Available {data.tableAvailability} </h3>
+      </div>
 
       <div style={cardStyle}>
         <FontAwesomeIcon icon={faCoffee} style={iconStyle} />
-        <h1 style={labelStyle}>Table2 </h1>
-        <h3 style={subHeadingStyle}>Warning type: Second Warning</h3>
-        <h3 style={subHeadingStyle}>Table Availability: Not Available</h3>
+        <h1 style={labelStyle}>Table {data.tableID}</h1>
+        <h3 style={subHeadingStyle}>Warning type: {data.noiseLevel} </h3>
+        <h3 style={subHeadingStyle}>Table Availability: Available {data.tableAvailability} </h3>
       </div>
     </div>
   );
