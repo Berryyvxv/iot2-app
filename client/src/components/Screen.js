@@ -9,8 +9,13 @@ function Screen() {
     tableStatus: "",
     noiseLevel:"",
 });
+const [data2, setData2] = useState({
+  tableID: "2",
+  tableStatus: "Occupied",
+  noiseLevel:"Low",
+});
   // data is the actual varible, and setData used to manipulate the state of these data varible
-  setInterval(function () {console.log(123)}, 10000)
+
 
 
 
@@ -25,7 +30,13 @@ setInterval(async () => {
           tableID: data.tableID,
           tableStatus: data.tableStatus,
           noiseLevel: data.noiseLevel,
-      });
+      })
+      setData2({
+        tableID: data2.tableID,
+        tableStatus: data2.tableStatus,
+        noiseLevel: data2.noiseLevel,
+    })
+      ;
   } catch (error) {
       console.error("Error fetching data:", error);
   }
@@ -39,7 +50,7 @@ setInterval(async () => {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center', // Center vertically
-    height: '75vh', // Adjust the height of the container to center vertically
+    height: '60vh', // Adjust the height of the container to center vertically
   };
 
   const cardStyle = {
@@ -57,7 +68,7 @@ setInterval(async () => {
   };
 
   const labelStyle = {
-    fontFamily: 'Nova Square, sans-serif',
+    fontFamily: 'Poppins, sans-serif',
     fontSize: '1.5rem',
     borderBottom: '2px solid #fff', // White borderline
     paddingBottom: '5px', // Add space between heading and subheading
@@ -99,9 +110,9 @@ setInterval(async () => {
 
       <div style={cardStyle}>
         <FontAwesomeIcon icon={faCoffee} style={iconStyle} />
-        <h1 style={labelStyle}>Table: {data.tableID}</h1>
-        <h3 style={subHeadingStyle}>Table Availability: {data.tableStatus} </h3>
-        <h3 style={subHeadingStyle}>Warning type: {data.noiseLevel} </h3>
+        <h1 style={labelStyle}>Table: {data2.tableID}</h1>
+        <h3 style={subHeadingStyle}>Table Availability: {data2.tableStatus} </h3>
+        <h3 style={subHeadingStyle}>Warning type: {data2.noiseLevel} </h3>
         
       </div>
         
